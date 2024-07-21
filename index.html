@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry Notepad</title>
+    <style>
+        #text-box, #definition-box {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+        #copy-button, #define-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paste Text and Copy with One Click</h1>
+    <textarea id="text-box" placeholder="Paste your text here..."></textarea><br>
+    <button id="copy-button" onclick="copyText()">Copy Text</button>
+    
+    <h1>Dictionary Lookup</h1>
+    <input type="text" id="word-input" placeholder="Enter a word to define">
+    <button id="define-button" onclick="lookupDefinition()">Define</button>
+    <textarea id="definition-box" placeholder="Definition will appear here..." readonly></textarea>
+
+    <script>
+        const apiKey = 'bf276e6c-a184-47d9-807e-cdb786b51a61';
+
+        function copyText() {
+            var textBox = document.getElementById('text-box');
+            textBox.select();
+            textBox.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand('copy');
+            // alert('Text copied to clipboard!');
+        }
+
+        async function lookupDefinition() {
+            const word = document.getElementById('word-input').value;
+            const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                let definition = "No definition found.";
+
+                if (Array.isArray(data) && data[0].shortdef) {
+                    definition = data[0].shortdef.join('\n');
+                }
+
+                document.getElementById('definition-box').value = definition;
+            } catch (error) {
+                console.error('Error fetching definition:', error);
+                document.getElementById('definition-box').value = 'Error fetching definition.';
+            }
+        }
+    </script>
+</body>
+</html>
