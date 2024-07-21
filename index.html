@@ -12,7 +12,7 @@
     <button id="cut-button">Cut Text</button>
     
     <h1>Merriam Webster Medical Dictionary Lookup</h1>
-    <input type="text" id="word-input" placeholder="Enter a word to define">
+    <input type="text" id="word-input" placeholder="Double click to paste">
     <button id="define-button">Define</button>
     <p id="definition-box">Definition will appear here...</p>
 
@@ -20,11 +20,11 @@
     <div class="input-row">
         <div class="input-group">
             <label for="start-date">Start Date:</label>
-            <input type="text" id="start-date" placeholder="yyyy/mm/dd">
+            <input type="date" id="start-date" placeholder="yyyy-mm-dd">
         </div>
         <div class="input-group">
             <label for="end-date">End Date:</label>
-            <input type="text" id="end-date" placeholder="yyyy/mm/dd">
+            <input type="date" id="end-date" placeholder="yyyy-mm-dd">
         </div>
     </div>
     <div class="input-row">
@@ -37,8 +37,15 @@
             <input type="number" id="end-height" step="0.1">
         </div>
     </div>
+    <div class="input-row">
+        <div class="input-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" step="1" min="6" max="18">
+        </div>
+    </div>
     <button id="calculate-button">Calculate Height Velocity</button>
     <p id="velocity-result">Velocity will appear here...</p>
+    <p id="normal-range-result">Height velocity analysis will appear here...</p>
 
     <script src="script.js"></script>
 </body>
